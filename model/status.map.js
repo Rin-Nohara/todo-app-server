@@ -1,0 +1,27 @@
+
+// 状态对应的状态码
+const STATUS_CODE_MAP = {
+  'FAIL': 400,
+  'CREATE_FAIL': 401,
+  'UPDATE_FAIL': 402,
+  'DELETE_FAIL': 403,
+  'SUCCESS': 200,
+  'USER_EXIST': 404,
+  'LOGIN_ERROR': 405
+}
+
+// 状态码对应的文案
+const CODE_DESC_MAP = {
+  [STATUS_CODE_MAP.FAIL]: '未知错误',
+  [STATUS_CODE_MAP.CREATE_FAIL]: '创建失败',
+  [STATUS_CODE_MAP.UPDATE_FAIL]: '更新失败',
+  [STATUS_CODE_MAP.DELETE_FAIL]: '删除失败',
+  [STATUS_CODE_MAP.SUCCESS]: '成功',
+  [STATUS_CODE_MAP.USER_EXIST]: '用户已存在',
+  [STATUS_CODE_MAP.LOGIN_ERROR]: '登录失败'
+}
+
+module.exports = {
+  STATUS_CODE_MAP,
+  CODE_DESC_MAP
+}

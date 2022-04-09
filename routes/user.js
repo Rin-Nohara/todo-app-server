@@ -20,6 +20,7 @@ router.post('/', async (ctx, next) => {
 router.get('/', async (ctx, next) => {
   const { telePhone, password } = ctx.query
 
+  // 验证参数格式
   ctx.verifyParams({
     telePhone: { type: "string", required: true },
     password: { type: "string", required: true },
@@ -28,9 +29,9 @@ router.get('/', async (ctx, next) => {
   const { statusCode, data } = await findUser({telePhone, password})
 
   if(data) { // 登录成功，jwt
-    const { _id, telePhone } = data;
+    const { _id, telePhone, userName } = data;
     // 生成 token
-    const token = jwt.sign({ _id, telePhone }, jwtSecret, { expiresIn });
+    const token = jwt.sign({ _id, telePhone, userName }, jwtSecret, { expiresIn });
     return ctx.body = new ResultModel({
       token
     }, statusCode)

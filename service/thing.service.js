@@ -20,7 +20,6 @@ async function createThing({name, description, userId}) {
 async function findThingByUser({userId}) {
   try {
     const thingList = await thingModel.findAll({
-      attributes: ['userId','thingName', 'thingDescription'],
       include: [
         {
           model: userModel,
@@ -37,7 +36,24 @@ async function findThingByUser({userId}) {
   }
 }
 
+async function updateThingById({ thingId, thingName, thingDescription }) {
+  try {
+    const res = await thingModel.update({
+      thingName,
+      thingDescription
+    }, {
+      where: {
+        id: thingId
+      }
+    })
+    return new ServiceModel(res, STATUS_CODE_MAP.SUCCESS)
+  } catch (error) {
+    return new ServiceModel(null, STATUS_CODE_MAP.UPDATE_FAIL, error.message)
+  }
+}
+
 module.exports = {
   createThing,
-  findThingByUser
+  findThingByUser,
+  updateThingById
 }

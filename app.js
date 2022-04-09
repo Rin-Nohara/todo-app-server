@@ -8,6 +8,7 @@ const jwt = require('koa-jwt')
 const parameter = require('koa-parameter')
 const koaStatic = require('koa-static')
 const path = require('path')
+const cors = require('koa2-cors');
 
 // config
 const { jwtSecret } = require('./configs/jwt.config')
@@ -30,6 +31,7 @@ app.use(bodyparser({
 app.use(json())
 app.use(logger())
 app.use(koaStatic(path.join(__dirname, 'public')))
+app.use(cors())
 
 // logger
 app.use(async (ctx, next) => {

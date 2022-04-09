@@ -7,7 +7,8 @@ const STATUS_CODE_MAP = {
   'DELETE_FAIL': 403,
   'SUCCESS': 200,
   'USER_EXIST': 404,
-  'LOGIN_ERROR': 405
+  'LOGIN_ERROR': 405,
+  'CREATE_THING_ERROR': 406,
 }
 
 // 状态码对应的文案
@@ -18,7 +19,8 @@ const CODE_DESC_MAP = {
   [STATUS_CODE_MAP.DELETE_FAIL]: '删除失败',
   [STATUS_CODE_MAP.SUCCESS]: '成功',
   [STATUS_CODE_MAP.USER_EXIST]: '用户已存在',
-  [STATUS_CODE_MAP.LOGIN_ERROR]: '登录失败'
+  [STATUS_CODE_MAP.LOGIN_ERROR]: '登录失败',
+  [STATUS_CODE_MAP.CREATE_THING_ERROR]: '创建事项失败',
 }
 
 module.exports = {

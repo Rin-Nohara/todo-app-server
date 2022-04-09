@@ -12,13 +12,14 @@ const Thing = seq.define('thing', {
     allowNull: true
   },
   // 可以创建外键：
-  userName: {
-    type: DataTypes.STRING,
+  userId: {
+    type: DataTypes.BIGINT(11),
+    field: 'userId',
     references: {
       // 这是对另一个模型的参考
       model: userModel,
       // 这是引用模型的列名
-      key: 'userName',
+      key: 'userId',
     }
   },
 });

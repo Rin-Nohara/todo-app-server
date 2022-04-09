@@ -29,9 +29,9 @@ router.get('/', async (ctx, next) => {
   const { statusCode, data } = await findUser({telePhone, password})
 
   if(data) { // 登录成功，jwt
-    const { _id, telePhone, userName } = data;
+    const { _id, telePhone, userName, userId } = data;
     // 生成 token
-    const token = jwt.sign({ _id, telePhone, userName }, jwtSecret, { expiresIn });
+    const token = jwt.sign({ _id, telePhone, userName, userId }, jwtSecret, { expiresIn });
     return ctx.body = new ResultModel({
       token
     }, statusCode)

@@ -2,7 +2,7 @@
 const { STATUS_CODE_MAP } = require('./status.map')
 
 class ServiceModel {
-  constructor(data, statusCode, msg) {
+  constructor(data, statusCode, msg = null) {
     this.data = data
     this.statusCode = statusCode
 

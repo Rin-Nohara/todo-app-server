@@ -1,7 +1,9 @@
 const router = require('koa-router')()
 const ResultModel = require('../model/result.model')
+const jwt = require('jsonwebtoken')
 
 const { createUser, findUser } = require('../service/user.service')
+const { jwtSecret, expiresIn } = require('../configs/jwt.config')
 
 router.prefix('/user')
 
@@ -14,15 +16,27 @@ router.post('/', async (ctx, next) => {
   ctx.body = new ResultModel({}, statusCode, msg)
 })
 
+// 登录
 router.get('/', async (ctx, next) => {
   const { telePhone, password } = ctx.query
-  const { statusCode, data, msg } = await findUser({telePhone, password})
+
+  ctx.verifyParams({
+    telePhone: { type: "string", required: true },
+    password: { type: "string", required: true },
+  });
+
+  const { statusCode, data } = await findUser({telePhone, password})
 
   if(data) { // 登录成功，jwt
-    
+    const { _id, telePhone } = data;
+    // 生成 token
+    const token = jwt.sign({ _id, telePhone }, jwtSecret, { expiresIn });
+    return ctx.body = new ResultModel({
+      token
+    }, statusCode)
   }
 
-  ctx.body = new ResultModel({}, statusCode, msg)
+  ctx.body = new ResultModel({}, statusCode)
 })
 
 module.exports = router

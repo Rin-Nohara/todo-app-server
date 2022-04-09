@@ -26,17 +26,17 @@ async function createUser({userName, telePhone, password, email}) {
 
 async function findUser({telePhone, password}) {
   try {
-    const userInfo = userModel.findOne({
+    const userInfo = await userModel.findOne({
       where: {
         telePhone,
         password
       },
-      attributes: ["userName", "telePhone", "email"], // 过滤返回字段
+      attributes: ["userName", "telePhone", "userEmail"], // 过滤返回字段
     })
 
     return new ServiceModel(userInfo, STATUS_CODE_MAP.SUCCESS)
   } catch(e) {
-    return new ServiceModel(null, STATUS_CODE_MAP.LOGIN_ERROR, msg)
+    return new ServiceModel(null, STATUS_CODE_MAP.LOGIN_ERROR, e)
   }
 }
 

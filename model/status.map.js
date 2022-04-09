@@ -9,6 +9,7 @@ const STATUS_CODE_MAP = {
   'USER_EXIST': 404,
   'LOGIN_ERROR': 405,
   'CREATE_THING_ERROR': 406,
+  'FIND_THING_ERROR': 407,
 }
 
 // 状态码对应的文案
@@ -21,6 +22,7 @@ const CODE_DESC_MAP = {
   [STATUS_CODE_MAP.USER_EXIST]: '用户已存在',
   [STATUS_CODE_MAP.LOGIN_ERROR]: '登录失败',
   [STATUS_CODE_MAP.CREATE_THING_ERROR]: '创建事项失败',
+  [STATUS_CODE_MAP.FIND_THING_ERROR]: '查找 thing 失败',
 }
 
 module.exports = {

@@ -31,7 +31,7 @@ async function findUser({telePhone, password}) {
         telePhone,
         password
       },
-      attributes: ["userName", "telePhone", "userEmail"], // 过滤返回字段
+      attributes: { exclude: ['password'] },
     })
 
     return new ServiceModel(userInfo, STATUS_CODE_MAP.SUCCESS)

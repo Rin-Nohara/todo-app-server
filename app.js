@@ -6,6 +6,8 @@ const bodyparser = require('koa-bodyparser')
 const logger = require('koa-logger')
 const jwt = require('koa-jwt')
 const parameter = require('koa-parameter')
+const koaStatic = require('koa-static')
+const path = require('path')
 
 // config
 const { jwtSecret } = require('./configs/jwt.config')
@@ -15,6 +17,7 @@ const thingRouter = require('./routes/thing')
 const userRouter = require('./routes/user')
 
 const auth = jwt({ secret: jwtSecret });
+const checkToken = require('./middleware/checkToken')
 
 // error handler
 onerror(app)
@@ -26,7 +29,7 @@ app.use(bodyparser({
 }))
 app.use(json())
 app.use(logger())
-app.use(require('koa-static')(__dirname + '/public'))
+app.use(koaStatic(path.join(__dirname, 'public')))
 
 // logger
 app.use(async (ctx, next) => {
@@ -38,7 +41,10 @@ app.use(async (ctx, next) => {
 
 // routes
 app.use(userRouter.routes(), userRouter.allowedMethods())
-app.use(auth).use(thingRouter.routes(), thingRouter.allowedMethods())
+app
+  .use(auth)
+  .use(checkToken)
+  .use(thingRouter.routes(), thingRouter.allowedMethods())
 
 // error-handling
 app.on('error', (err, ctx) => {

@@ -1,6 +1,7 @@
 const router = require('koa-router')()
 const ResultModel = require('../model/result.model')
 const jwt = require('jsonwebtoken')
+const { STATUS_CODE_MAP } = require('../model/status.map')
 
 const { createUser, findUser } = require('../service/user.service')
 const { jwtSecret, expiresIn } = require('../configs/jwt.config')
@@ -17,8 +18,8 @@ router.post('/', async (ctx, next) => {
 })
 
 // 登录
-router.get('/', async (ctx, next) => {
-  const { telePhone, password } = ctx.query
+router.post('/login', async (ctx, next) => {
+  const { telePhone, password } = ctx.request.body
 
   // 验证参数格式
   ctx.verifyParams({
@@ -38,6 +39,12 @@ router.get('/', async (ctx, next) => {
   }
 
   ctx.body = new ResultModel({}, statusCode)
+})
+
+// 身份状态
+router.get('/status', async (ctx, next) => {
+  // 存在 checkToken 中间件，只要走到这个路由，就证明 token 存在且没有过期
+  ctx.body = new ResultModel({msg: '已登录'}, STATUS_CODE_MAP.SUCCESS)
 })
 
 module.exports = router

@@ -1,11 +1,12 @@
 
 // 状态对应的状态码
 const STATUS_CODE_MAP = {
+  'SUCCESS': 200, // !! 重要，前端需要知道
+  'TOKEN_EXPIRES': 500, // !! 重要，前端需要知道
   'FAIL': 400,
   'CREATE_FAIL': 401,
   'UPDATE_FAIL': 402,
   'DELETE_FAIL': 403,
-  'SUCCESS': 200,
   'USER_EXIST': 404,
   'LOGIN_ERROR': 405,
   'CREATE_THING_ERROR': 406,
@@ -23,6 +24,7 @@ const CODE_DESC_MAP = {
   [STATUS_CODE_MAP.LOGIN_ERROR]: '登录失败',
   [STATUS_CODE_MAP.CREATE_THING_ERROR]: '创建事项失败',
   [STATUS_CODE_MAP.FIND_THING_ERROR]: '查找 thing 失败',
+  [STATUS_CODE_MAP.TOKEN_EXPIRES]: '身份过期 请重新登录'
 }
 
 module.exports = {

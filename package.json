@@ -3,9 +3,10 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "start": "node bin/www",
-    "dev": "./node_modules/.bin/nodemon bin/www",
-    "prd": "pm2 start bin/www",
+    "start": "cross-env NODE_ENV=dev node bin/www",
+    "dev": "cross-env NODE_ENV=dev  ./node_modules/.bin/nodemon bin/www",
+    "prd": "cross-env NODE_ENV=prod DB_PWD=******* pm2 start bin/www",
+    "dbsync": "cross-env NODE_ENV=prod DB_PWD=******* node ./db/db.sync.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {

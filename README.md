@@ -1,5 +1,11 @@
 ## TODO
 
+### 上线注意
+
+- 部署之前需要在 package.json 中设置线上数据库密码（ prd / dbsync 两个命令 ）
+
+- 初次部署， pm2 之前需要先执行 `pnpm run dbsync`，再执行 `pnpm run prd`
+
 ### 开发注意
 
 router 返回数据结构已经抽象为 ResultModel 具体的文案，只需要透传 service 层的 statusCode。

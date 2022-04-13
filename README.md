@@ -17,7 +17,7 @@ service 返回数据结构已经抽象为 ServiceModel，statusCode 在 service 
 
 ### 重要且紧急
 
-- 登录逻辑，现在 username 使用 deviceID 代替，后续替换为登录逻辑
+- ~登录逻辑，现在 username 使用 deviceID 代替，后续替换为登录逻辑~
 
 ### 重要不紧急
 

@@ -42,7 +42,10 @@ app.use(async (ctx, next) => {
 })
 
 // routes
-app.use(userRouter.routes(), userRouter.allowedMethods())
+app
+.use(checkToken)
+.use(userRouter.routes(), userRouter.allowedMethods());
+
 app
   .use(auth)
   .use(checkToken)
